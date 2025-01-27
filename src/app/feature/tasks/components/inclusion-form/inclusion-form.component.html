@@ -2,7 +2,12 @@
     <app-include-task-form class="col-span-11"></app-include-task-form>
 
 
-    <div class="col-span-1 flex item-start mt-2">
+    <div 
+        class="col-span-1 flex item-start mt-2"
+        [ngClass]="{
+            'opacity-30': taskService.isLoadingTask(),
+            'opacity-100': !taskService.isLoadingTask
+         }">
         <span class="{{
             colorVariantes[selectedCategoryId()]
             }} rounded-full w-10 h-10"></span>

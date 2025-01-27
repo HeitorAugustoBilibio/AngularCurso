@@ -1,5 +1,10 @@
-import { APP_INITIALIZER, EnvironmentProviders, inject, Provider } from "@angular/core";
-import { ThemeService } from "../shared/services/theme.service";
+import {
+  APP_INITIALIZER,
+  EnvironmentProviders,
+  inject,
+  Provider,
+} from '@angular/core';
+import { ThemeService } from '../shared/services/theme.service';
 
 export function initializerTheme(): () => void {
     const themeService = inject(ThemeService);
