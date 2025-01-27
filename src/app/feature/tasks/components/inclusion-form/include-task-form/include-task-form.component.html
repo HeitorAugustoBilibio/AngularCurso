@@ -1,4 +1,11 @@
-<form autocomplete="off" class="flex flex-row gap-2 select-none" [formGroup]="newTaskForm">
+<form
+ [ngClass]="{
+    'cursor-not-allowed animate-pulse': isIncludeTaskFormDisabled(),
+    'cursor-pointer': !isIncludeTaskFormDisabled(),
+ }"
+ autocomplete="off" 
+ class="flex flex-row gap-2 select-none" 
+ [formGroup]="newTaskForm">
     <mat-form-field class="w-full">
         <mat-label>Tarefas</mat-label>
         <input
@@ -9,7 +16,10 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Categoria</mat-label>
-        <mat-select formControlName="categoryId" (selectionChange)="selectionChangeHandler($event)" (keyup.enter)="onEnterToAddATask()">
+        <mat-select
+            formControlName="categoryId" 
+            (selectionChange)="selectionChangeHandler($event)"
+            (keyup.enter)="onEnterToAddATask()">
             @for(category of categories(); track category.id){
                 <mat-option value="{{category.id}}">{{
                     category.name

@@ -14,6 +14,7 @@ export class TaskService {
   public tasks = signal<Task[]>([])
   public numberOfTasks = computed(() => this.tasks().length);
   public readonly apiUrl = environment.apiUrl;
+  public isLoadingTask = signal(false)
 
   public getTasks(): void {
     this._htppClient.get<Task[]>(`${this.apiUrl}/tasks`).subscribe((tasks) => {
@@ -36,9 +37,16 @@ export class TaskService {
   }
 
   public InsertATaskInTheTasksList(newTasks: Task): void{
-    const updateTasks = [...this.tasks(), newTasks];
-    const SortedTask = this.getSortedTask(updateTasks)
-    this.tasks.set(SortedTask);
+    //const updateTasks = [...this.tasks(), newTasks];
+    //const SortedTask = this.getSortedTask(updateTasks)
+    //this.tasks.set(SortedTask);
+
+
+    this.tasks.update(tasks => {
+      const newTasksList = [...tasks, newTasks];
+      return this.getSortedTask(newTasksList)
+
+    })
   }
 
   public updateTask(updateTask: Task): Observable<Task>{
